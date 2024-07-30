@@ -6,7 +6,7 @@
 #include <chrono>
 using namespace std;
 
-extern int deck[13]; //RD‹L˜^—p•Ï”
+extern int deck[13]; //Å½RÅ½Dâ€¹LËœ^â€”pâ€¢ÃÂâ€
 
 void initialization();
 int sum_card(vector<int> a);
