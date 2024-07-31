@@ -6,8 +6,10 @@
 #include <chrono>
 using namespace std;
 
-extern int deck[13]; //ŽRŽD‹L˜^—p•Ï”
+extern int deck[13]; //山札記録用変数
 
-void initialization();
+int initialization(void);
+int betting(int);
 int sum_card(vector<int> a);
 int draw();
+void show_card(vector<int>);
