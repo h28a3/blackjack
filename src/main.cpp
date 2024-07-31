@@ -3,76 +3,86 @@
 int deck[13];
 
 int main(void) {
-    initialization();
+    int coin = initialization();
+    int flag = 0;
+    
+    int count = 0;
+    int sum_player = 0;
 
-    vector<vector<int>> card(2); //èD‹L˜^—p•Ï”
+    while (coin > 0) {
+        vector<vector<int>> card(2); //æ‰‹æœ­è¨˜éŒ²ç”¨å¤‰æ•°
+        count++;
+        cout << "\n"<< count << "å›ç›®ã®å‹è² ã‚’é–‹å§‹ã—ã¾ã™ï¼\n";
 
-    for (int i = 0;i < 2;i++) {
-        for (int j = 0;j < 2;j++)
-            card[i].push_back(draw()); //‰‚ß‚ÉƒvƒŒƒCƒ„[CƒfƒB[ƒ‰[‚Ì—¼•û‚É“ñ–‡”z‚é
-    }
+        int bet;
+        bet = betting(coin);
+        for (int i = 0;i < 2;i++) {
+            for (int j = 0;j < 2;j++)
+                card[i].push_back(draw()); //åˆã‚ã«ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ï¼Œãƒ‡ã‚£ãƒ¼ãƒ©ãƒ¼ã®ä¸¡æ–¹ã«äºŒæšé…ã‚‹
+        }
 
-    cout << "Player's card is "; //ƒvƒŒƒCƒ„[‚ÌƒJ[ƒho—Í
-    for (int i = 0;i < card[1].size();i++)
-        cout << card[0][i] << " ";
-    cout << ".\n";
-
-    int sum_player = sum_card(card[0]);
-
-    while (true) {
-        cout << "Do yuo wanna add a card?(y or n)"; //ˆø‚­ê‡‚ÍyCˆø‚©‚È‚¢ê‡‚Ín‚ğ“ü—Í
-        char s;
-        cin >> s;
-        if (s == 'n')
-            break;
-
-        card[0].push_back(draw());
-
-        cout << "Player's card is "; //ƒvƒŒƒCƒ„[‚ÌƒJ[ƒho—Í
-        for (int i = 0;i < card[0].size();i++)
-            cout << card[0][i] << " ";
-        cout << ".\n";
-
+        cout << "\nãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼"; //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ã‚«ãƒ¼ãƒ‰å‡ºåŠ›
+        show_card(card[0]);
         sum_player = sum_card(card[0]);
-        if (sum_player > 21) { //21‚ğ’´‚¦‚½‚çƒoƒXƒg‚µ‚ÄƒvƒŒƒCƒ„[‚Ì•‰‚¯
-            cout << "Player is busted.";
-            return 0;
+
+        while (true) {
+            cout << "ã‚‚ã†ä¸€æšå¼•ãã¾ã™ã‹ï¼Ÿ(y or n)"; //å¼•ãå ´åˆã¯yï¼Œå¼•ã‹ãªã„å ´åˆã¯nã‚’å…¥åŠ›
+            char s;
+            cin >> s;
+            if (s == 'n')
+                break;
+            card[0].push_back(draw());
+
+            cout << "\nãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼"; //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ã‚«ãƒ¼ãƒ‰å‡ºåŠ›
+            show_card(card[0]);
+
+            sum_player = sum_card(card[0]);
+            if (sum_player > 21) { //21ã‚’è¶…ãˆãŸã‚‰ãƒã‚¹ãƒˆã—ã¦ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®è² ã‘
+                cout << "ãƒã‚¹ãƒˆã—ã¾ã—ãŸï¼\n";
+                coin -= bet;
+                flag = 1;
+                break;
+            }
+        }
+        if (flag == 1)
+            continue;;
+
+        cout << "ã‚ãªãŸã®ã‚¹ã‚³ã‚¢ã¯" << sum_player << "ã§ã™ï¼\n\n";
+
+        cout << "ãƒ‡ã‚£ãƒ¼ãƒ©ãƒ¼"; //ãƒ‡ã‚£ãƒ¼ãƒ©ãƒ¼ã®ã‚«ãƒ¼ãƒ‰å‡ºåŠ›
+        show_card(card[1]);
+
+        while (true) {
+            int sum_dealer = sum_card(card[1]);
+            if (sum_dealer <= 16) { //ãƒ‡ã‚£ãƒ¼ãƒ©ãƒ¼ã¯ã‚¹ã‚³ã‚¢ãŒ16ä»¥ä¸‹ã®ã¨ãã¯ã•ã‚‰ã«å¼•ã
+                card[1].push_back(draw());
+                sum_dealer = sum_card(card[1]);
+            }
+            cout << "ãƒ‡ã‚£ãƒ¼ãƒ©ãƒ¼"; //ãƒ‡ã‚£ãƒ¼ãƒ©ãƒ¼ã®ã‚«ãƒ¼ãƒ‰å‡ºåŠ›
+            show_card(card[1]);
+
+            if (sum_dealer > 21) { //21ã‚’è¶…ãˆãŸã‚‰ãƒã‚¹ãƒˆã—ã¦ãƒ‡ã‚£ãƒ¼ãƒ©ãƒ¼ã®è² ã‘
+                cout << "ãƒ‡ã‚£ãƒ¼ãƒ©ãƒ¼ã®ã‚¹ã‚³ã‚¢ã¯" << sum_dealer << "ã§ã™ï¼" << "\n";
+                cout << "ãƒ‡ã‚£ãƒ¼ãƒ©ãƒ¼ãŒãƒã‚¹ãƒˆ\nãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å‹åˆ©";
+                coin += bet;
+                break;
+            }
+            else if (sum_dealer >= 17) { //17ã‚’è¶…ãˆãŸã‚‰å¼•ãã®ã‚’ã‚„ã‚ã¦å‹æ•—åˆ¤å®š
+                cout << "ãƒ‡ã‚£ãƒ¼ãƒ©ãƒ¼ã®ã‚¹ã‚³ã‚¢ã¯" << sum_dealer << "ã§ã™ï¼" << "\n";
+                if (sum_dealer == sum_player)
+                    cout << "ãƒ‰ãƒ­ãƒ¼\n";
+                else if (sum_dealer > sum_player) {
+                    cout << "ãƒ‡ã‚£ãƒ¼ãƒ©ãƒ¼ã®å‹åˆ©\n";
+                    coin -= bet;
+                }
+                else {
+                    cout << "ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å‹åˆ©\n";
+                    coin += bet;
+                }
+                break;
+            }
         }
     }
-
-    cout << "Player's score is " << sum_player << ".\n" ;
-
-    cout << "Dealer's card is "; //ƒfƒB[ƒ‰[‚ÌƒJ[ƒho—Í
-    for (int i = 0;i < card[1].size();i++)
-        cout << card[1][i] << " ";
-    cout << ".\n";
-
-    while (true) {
-        int sum_dealer = sum_card(card[1]);
-        if (sum_dealer <= 16) { //ƒfƒB[ƒ‰[‚ÍƒXƒRƒA‚ª16ˆÈ‰º‚Ì‚Æ‚«‚Í‚³‚ç‚Éˆø‚­
-            card[1].push_back(draw());
-            sum_dealer = sum_card(card[1]);
-        }
-
-        cout << "ƒfƒB[ƒ‰[‚ÌƒJ[ƒh‚ÍDealer's card is "; //ƒfƒB[ƒ‰[‚ÌƒJ[ƒho—Í
-        for (int i = 0;i < card[1].size();i++)
-            cout << card[1][i] << " ";
-        cout << ".\n";
-
-        if (sum_dealer > 21) { //21‚ğ’´‚¦‚½‚çƒoƒXƒg‚µ‚ÄƒfƒB[ƒ‰[‚Ì•‰‚¯
-            cout << "Dealer's score is " << sum_dealer << "." << "\n";
-            cout << "Dealer is busted.\nPlayer win.";
-            return 0;
-        }
-        else if (sum_dealer >= 17) { //17‚ğ’´‚¦‚½‚çˆø‚­‚Ì‚ğ‚â‚ß‚ÄŸ”s”»’è
-            cout << "Dealer's score is " << sum_dealer << "." << "\n";
-            if (sum_dealer == sum_player)
-                cout << "tie.";
-            else if (sum_dealer > sum_player)
-                cout << "Dealer wins.";
-            else
-                cout << "Player win.";
-            return 0;
-        }
-    }
+    cout << "æ‰€æŒé‡‘ãŒãªããªã‚Šã¾ã—ãŸ\n";
+    return 0;
 }
