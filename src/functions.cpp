@@ -15,10 +15,10 @@ int initialization(void) {
 int betting(int coin) {
     int bet;
     while (true) {
-        cout << "コインを何枚賭けますか？(所持：" << coin << "枚)";
+        cout << "How many coins would you like to bet?(you have：" << coin << ".)";
         cin >> bet;
         if (bet > coin) {
-            cout << "所持枚数より少ない数を入力してください．\n";
+            cout << "Please enter a number less than the number you have.\n";
             continue;
         }
         return bet;
@@ -49,8 +49,8 @@ int draw() { //カードを引く関数
 }
 
 void show_card(vector<int> a) {
-    cout << "のカードは"; //カード出力
+    cout << "card is"; //カード出力
     for (int i : a)
         cout << i << " ";
-    cout << "です．\n";
+    cout << ".\n";
 }
