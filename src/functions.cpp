@@ -1,11 +1,28 @@
 #include"header.h"
 
-void initialization() {
+int initialization(void) {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
     srand((unsigned int)time(NULL));
     for (int i = 0;i < 13;i++)
         deck[i] = 4; //山札生成
+    cout << "コインを何枚購入しますか？";
+    int coin;
+    cin >> coin;
+    return coin;
+}
+
+int betting(int coin) {
+    int bet;
+    while (true) {
+        cout << "コインを何枚賭けますか？(所持：" << coin << "枚)";
+        cin >> bet;
+        if (bet > coin) {
+            cout << "所持枚数より少ない数を入力してください．\n";
+            continue;
+        }
+        return bet;
+    }
 }
 
 int sum_card(vector<int> a) { //手札の合計を計算する．
@@ -23,10 +40,17 @@ int draw() { //カードを引く関数
     int r;
     while (true) {
         r = rand() % 13 + 1; //乱数生成
-        if (deck[r-1] > 0) { //山札に含まれるカードのみ処理
-            deck[r-1]--;
+        if (deck[r - 1] > 0) { //山札に含まれるカードのみ処理
+            deck[r - 1]--;
             break;
         }
     }
     return r;
+}
+
+void show_card(vector<int> a) {
+    cout << "のカードは"; //カード出力
+    for (int i : a)
+        cout << i << " ";
+    cout << "です．\n";
 }
