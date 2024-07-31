@@ -12,3 +12,5 @@ The rules of blackjack are as follows.
     1. When you think you have enough in hand, you wave your hand to the side to indicate that you don't want any cards, and you play the dealer with the same score.
 1. After all players have made their selections, the dealer turns over the cards and continues to draw cards until the player has 17 or more points, and the game is won.
 1. The player who is closer to 21 points than the dealer wins, while the player who is farther away from 21 points than the dealer loses. In case of a tie, the game is called a “push” and the game ends in a tie.
+
+日本語版はQiitaにおいてあります．https://qiita.com/h28a3/items/1356317e3fdf3211f6f1
