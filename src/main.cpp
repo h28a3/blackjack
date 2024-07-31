@@ -21,24 +21,24 @@ int main(void) {
                 card[i].push_back(draw()); //初めにプレイヤー，ディーラーの両方に二枚配る
         }
 
-        cout << "\nプレイヤー"; //プレイヤーのカード出力
+        cout << "\nPlayer's"; //プレイヤーのカード出力
         show_card(card[0]);
         sum_player = sum_card(card[0]);
 
         while (true) {
-            cout << "もう一枚引きますか？(y or n)"; //引く場合はy，引かない場合はnを入力
+            cout << "Do you wanna add a card?(y or n)"; //引く場合はy，引かない場合はnを入力
             char s;
             cin >> s;
             if (s == 'n')
                 break;
             card[0].push_back(draw());
 
-            cout << "\nプレイヤー"; //プレイヤーのカード出力
+            cout << "\nPlayer's"; //プレイヤーのカード出力
             show_card(card[0]);
 
             sum_player = sum_card(card[0]);
             if (sum_player > 21) { //21を超えたらバストしてプレイヤーの負け
-                cout << "バストしました．\n";
+                cout << "Player busted．\n";
                 coin -= bet;
                 flag = 1;
                 break;
@@ -47,9 +47,9 @@ int main(void) {
         if (flag == 1)
             continue;;
 
-        cout << "あなたのスコアは" << sum_player << "です．\n\n";
+        cout << "Player's score is" << sum_player << ".\n\n";
 
-        cout << "ディーラー"; //ディーラーのカード出力
+        cout << "Dealer's"; //ディーラーのカード出力
         show_card(card[1]);
 
         while (true) {
@@ -58,31 +58,31 @@ int main(void) {
                 card[1].push_back(draw());
                 sum_dealer = sum_card(card[1]);
             }
-            cout << "ディーラー"; //ディーラーのカード出力
+            cout << "Dealer's"; //ディーラーのカード出力
             show_card(card[1]);
 
             if (sum_dealer > 21) { //21を超えたらバストしてディーラーの負け
-                cout << "ディーラーのスコアは" << sum_dealer << "です．" << "\n";
-                cout << "ディーラーがバスト\nプレイヤーの勝利";
+                cout << "Dealer's score is" << sum_dealer << "." << "\n";
+                cout << "Dealer busted.\nPlayer win.\n";
                 coin += bet;
                 break;
             }
             else if (sum_dealer >= 17) { //17を超えたら引くのをやめて勝敗判定
-                cout << "ディーラーのスコアは" << sum_dealer << "です．" << "\n";
+                cout << "Dealer's score is" << sum_dealer << "." << "\n";
                 if (sum_dealer == sum_player)
-                    cout << "ドロー\n";
+                    cout << "tie.\n";
                 else if (sum_dealer > sum_player) {
-                    cout << "ディーラーの勝利\n";
+                    cout << "Dealer win\n";
                     coin -= bet;
                 }
                 else {
-                    cout << "プレイヤーの勝利\n";
+                    cout << "Player win\n";
                     coin += bet;
                 }
                 break;
             }
         }
     }
-    cout << "所持金がなくなりました\n";
+    cout << "Player has no money.\n";
     return 0;
 }
