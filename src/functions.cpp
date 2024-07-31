@@ -5,26 +5,26 @@ void initialization() {
     cin.tie(nullptr);
     srand((unsigned int)time(NULL));
     for (int i = 0;i < 13;i++)
-        deck[i] = 4; //RD¶¬
+        deck[i] = 4; //å±±æœ­ç”Ÿæˆ
 }
 
-int sum_card(vector<int> a) { //èD‚Ì‡Œv‚ğŒvZ‚·‚éD
+int sum_card(vector<int> a) { //æ‰‹æœ­ã®åˆè¨ˆã‚’è¨ˆç®—ã™ã‚‹ï¼
     int sum = 0;
     for (int i = 0;i < a.size();i++) {
-        if (a[i] > 10) sum += 10; //11~13‚à10‚Æ‚µ‚Ä”‚¦‚ç‚ê‚é
+        if (a[i] > 10) sum += 10; //11~13ã‚‚10ã¨ã—ã¦æ•°ãˆã‚‰ã‚Œã‚‹
         else sum += a[i];
     }
     if (find(a.begin(), a.end(), 1) != a.end() && sum <= 11)
-        sum += 10; //1‚Í1‚Ü‚½‚Í11‚Ì“s‡‚Ì—Ç‚¢•û‚Å”‚¦‚ç‚ê‚é
+        sum += 10; //1ã¯1ã¾ãŸã¯11ã®éƒ½åˆã®è‰¯ã„æ–¹ã§æ•°ãˆã‚‰ã‚Œã‚‹
     return sum;
 }
 
-int draw() { //ƒJ[ƒh‚ğˆø‚­ŠÖ”
+int draw() { //ã‚«ãƒ¼ãƒ‰ã‚’å¼•ãé–¢æ•°
     int r;
     while (true) {
-        r = rand() % 13 + 1; //—”¶¬
-        if (deck[r] > 0) { //RD‚ÉŠÜ‚Ü‚ê‚éƒJ[ƒh‚Ì‚İˆ—
-            deck[r]--;
+        r = rand() % 13 + 1; //ä¹±æ•°ç”Ÿæˆ
+        if (deck[r-1] > 0) { //å±±æœ­ã«å«ã¾ã‚Œã‚‹ã‚«ãƒ¼ãƒ‰ã®ã¿å‡¦ç†
+            deck[r-1]--;
             break;
         }
     }
