@@ -6,6 +6,9 @@ I have developed several games in C++. The next game I wanted to develop was Bla
 The rules of blackjack are as follows.
 (Reference:https://casinocafe.jp/casinovenus/game/blackjack/)
 
+1. The game starts when the casino dealer signals “place your bet” (bet on it).
+1. Place your chips in the betting area.(Only the original was implemented.)
+1. The casino dealer signals “No More Bets” (the deadline) to close the bet.
 1. The dealer deals two cards each.
 1. The dealer asks each player in turn if he or she wishes to add cards.
     1. To add a card, tap the table lightly. You may hit as many cards as you like, but if you exceed 21 points, you will be disqualified.
